@@ -1,0 +1,92 @@
+//Tarefa 2: Cada processo correto executa testes até achar outro processo correto
+//Aluno: Guilherme Eduardo Konopatzki Filho
+//Disciplina: Sistemas distribuídos
+//Professor: Elias Duarte
+//Última Modificação: 15/11/2021
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "smpl.h"
+
+/*eventos*/
+#define test 1
+#define fault 2
+#define repair 3
+
+/*descritor do nodo*/
+typedef struct{
+	int id;
+	/*memoria local do nodo aqui*/
+}tnodo;
+
+tnodo *nodo;
+int main(int argc, char const *argv[]) {
+	static int N, token, event, r, i, testado;
+	static char fa_name[5];
+	/*facility representa o objeto simulado*/
+
+	if(argc != 2){
+		puts("Uso correto: tempo <num-nodos>");
+		exit(1);
+	}
+
+	N = atoi(argv[1]);
+	smpl(0, "programa tempo");
+	reset();
+	stream(1);
+	nodo = (tnodo*) malloc(sizeof(tnodo)*N);
+	for (i = 0; i < N; i++) {
+	 	memset(fa_name, '\0', 5);
+	 	printf(fa_name, "%d", i);
+	 	nodo[i].id = facility(fa_name, 1);
+	 }
+
+	 /*schedule inicial*/
+	 for (i = 0; i < N; i++)
+	 	schedule(test, 30.0, i);
+	 schedule(fault, 31.0, 0);
+	 schedule(fault, 41.0, 1);
+	 schedule(fault, 41.0, 2);
+	 schedule(fault, 51.0, 3);
+	
+	puts("---------------------------------------------------------------------");
+	puts("Sistemas Distribuídos 2021/ERE4: Tarefa Prática 2");
+	puts("Cada processo correto executa testes até achar outro processo correto");
+	puts("Autor: Guilherme Eduardo Konopatzki Filho");
+	puts("Última alteração: 15/11/2021");
+	printf("Este programa foi executado para N = %d processos.\n", N);
+	puts("---------------------------------------------------------------------");
+	 while(time() < 130.0) {
+	 	cause(&event, &token);
+	 	switch(event) {
+	 		case test:
+	 		testado = (token+1)%N;//próximo nodo no anel
+	 		if(status(nodo[token].id) != 0) break;//se falho, quebra
+			for(i = 0; i < N; i++){//for para continuar procurando nodo até encontrar sem-falha
+				if(status(nodo[testado].id) != 0) {
+					printf("O nodo %d encontrou o nodo %d FALHO no tempo %5.1f e continuou a procurar\n", token, testado, time());
+					testado++;//incrementa para testar o próximo, até achar um sem-falha
+				} else if(testado != token){
+					//se nodo a ser testado não for o atual (token), então encontrou um nodo sem-falha!
+					printf("O nodo %d encontrou o nodo %d SEM-FALHA no tempo %5.1f\n", token, testado, time());
+					break;
+				}
+			}
+	 		schedule(test, 30.0, token);
+	 		break;
+	 		case fault:
+	 		r = request(nodo[token].id, token, 0);
+	 		if(r != 0) {
+	 			puts("Impossível falhar nodo");
+	 			exit(1);
+	 		}
+	 		printf("O nodo %d falhou no tempo %5.1f\n", token, time());
+	 		break;
+	 		case repair:
+	 		release(nodo[token].id, token);
+	 		printf("O nodo %d recuperou no tempo %5.1f\n", token, time());
+	 		schedule(test, 30.0, token);
+	 	}
+	 }
+	return 0;
+}
