@@ -1,0 +1,406 @@
+/*
+=============================================================================
+Codigo fonte: implementacao do V-Cube.
+Aluno: Guilherme Eduardo Konopatzki Filho
+Professor: Prof. Elias P. Duarte Jr.
+Disciplina: Sistemas Distribuídos
+Ultima modificacao: 15/11/2021
+=============================================================================
+*/
+
+/*--------bibliotecas--------*/
+#include <stdio.h>
+#include <stdlib.h>
+#include "smpl.h"
+
+/*--------eventos--------*/
+#define test 1
+#define fault 2
+#define repair 3
+
+/*--------definicoes usadas pela funcao cisj--------*/
+#define POW_2(num) (1<<(num)) //equivale a 2 elevado a num (sendo num o tamanho dos clusters)
+#define VALID_J(j, s) ((POW_2(s-1)) >= j) //verifica se j eh um indice valido para acessar no cluster
+
+
+/*--------descritor do nodo--------*/
+typedef struct{
+	int id; //cada nodo tem um id
+	int *state; //vetor state do nodo
+}tnodo;
+tnodo *nodo; //global, pois é utilizado em funcoes especificas
+
+/*--------estrutura do vetor de testes--------*/
+typedef struct{
+	int *vector; //cada nodo retornara um vetor de inteiros
+	int size; //tamanho do vetor
+} testsvector;
+
+/*--------estrutura usada pela funcao cisj--------*/
+typedef struct node_set {
+	int* nodes;
+	ssize_t size;
+	ssize_t offset;
+} node_set;
+
+/*--------funcoes usadas pelo cisj--------*/
+static node_set*
+set_new(ssize_t size)
+{
+	node_set* new;
+
+	new = (node_set*)malloc(sizeof(node_set));
+	new->nodes = (int*)malloc(sizeof(int)*size);
+	new->size = size;
+	new->offset = 0;
+	return new;
+}
+
+static void
+set_insert(node_set* nodes, int node)
+{
+	if (nodes == NULL) return;
+	nodes->nodes[nodes->offset++] = node;
+}
+
+static void
+set_merge(node_set* dest, node_set* source)
+{
+	if (dest == NULL || source == NULL) return;
+	memcpy(&(dest->nodes[dest->offset]), source->nodes, sizeof(int)*source->size);
+	dest->offset += source->size;
+}
+
+static void
+set_free(node_set* nodes)
+{
+	free(nodes->nodes);
+	free(nodes);
+}
+/* node_set.h --| */
+
+node_set*
+cis(int i, int s)
+{
+	node_set* nodes, *other_nodes;
+	int xor = i ^ POW_2(s-1);
+	int j;
+
+	/* starting node list */
+	nodes = set_new(POW_2(s-1));
+
+	/* inserting the first value (i XOR 2^^(s-1)) */
+	set_insert(nodes, xor);
+
+	/* recursion */
+	for (j=1; j<=s-1; j++) {
+		other_nodes = cis(xor, j);
+		set_merge(nodes, other_nodes);
+		set_free(other_nodes);
+	}
+	return nodes;
+}
+/*--------fim das funcoes do cisj--------*/
+
+
+/*--------funcao que encontra qual sera o nodo testador--------*/
+//nesta funcao sao encontrados os testadores de cada nodo
+//(primeiro nodo SEM-FALHA de cada cluster em cada etapa)
+int findtester (int i, int s) {
+	int aux = 0;
+	node_set* cluster = cis(i, s);
+
+	for(int j = 0; j < cluster->size; j++){ //for para percorrer todo o cluster
+		if(status(nodo[cluster->nodes[j]].id) == 0){//verifica se o nodo encontrado é sem-falha
+			//ira retornar o primeiro do cluster que esta SEM-FALHA
+			aux = cluster->nodes[j];
+			free(cluster); //libera a memoria
+			return aux;
+		}
+	}
+	//se acabar o for, eh porque todos os nodos do cluster estao falhos
+	free(cluster);
+	return -2;
+}
+
+
+/*--------funcao que retorna os testes que serao executados pelo nodo--------*/
+testsvector* testes(int n, int s, tnodo *nodo) {
+	//n = numero de nodos
+	//s = log de n (numero de rodadas de teste [cada linha da tabela])
+
+	int nodoTestador, position = 0;
+	testsvector *tests = (testsvector*) malloc(sizeof(testsvector)*n);
+
+	for(int k = 0; k < n; k++){
+		tests[k].vector = (int*) malloc(sizeof(int)*n);//aloca o vetor com n posicoes
+		if(status(nodo[k].id) == 1) {
+			tests[k].size = 0;
+			continue;
+		}//se for falho, nao faz a busca por testadores
+
+		for(int i = 0; i < n; i++){ //for que percorre todos os nodos
+			for(int j = 1; j <= s; j++){ //for para percorrer todas as etapas
+				nodoTestador = findtester(i, j); //encontra testador do nodo
+
+				//se o nodo for igual a k, entao adiciona a lista de testadores daquele nodo
+				//significa que é o testador que estamos procurando
+				if(nodoTestador == k)
+				tests[k].vector[position++] = i;
+			}
+		}
+		tests[k].size = position;
+		position = 0;
+	}
+	return tests; //retorna o vetor com os testes executados
+}
+
+//funcao que printa o vetor state de todos os nodos
+void print_state(tnodo *nodo, int n){
+
+	printf ("\nVetor STATE(i): ");
+	for (int i = 0; i < n; i++)
+		printf ("%d  ", i);
+	printf ("\n");
+	printf ("-------------------------------------\n");
+
+	for (int i = 0; i < n; i++){
+		printf (">     Nodo %d | ", i);
+		for (int j = 0; j < n; j++)
+			if(j < 9)
+				printf (" %d ", nodo[i].state[j]);
+			else
+				printf ("  %d ", nodo[i].state[j]);
+		printf("\n");
+	}
+	printf("\n");
+}
+
+void print_init(){
+	printf ("===========================================================\n");
+	printf ("         Execucao do algoritmo V-Cube\n");
+	printf ("         Aluno: Guilherme Eduardo Konopatzki Filho\n");
+	printf ("         Professor: Elias P. Duarte Jr.\n");
+	printf ("         Disciplina: Sistemas Distribuidos\n");
+	printf ("         Ultima modificacao: 15/11/2021\n");
+	printf ("===========================================================\n\n");
+}
+
+void print_end(int r, int n){
+	//apos o fim do tempo, printa os vetores states
+	printf("\n--------------------------------------------------------------\n");
+	printf("                       RESULTADOS\n");
+	printf("\nNúmero de rodadas total do programa: %d\n", r-1);
+	printf("\nVetor STATE ao final do diagnostico:\n");
+	print_state(nodo, n);
+}
+
+int main(int argc, char const *argv[]) {
+	static int N, token, event, r, i, aux, s;
+	static int nodosemfalha = 1, nodofalho = 0, nrodadas = 0, ntestes = 0, totalrodadas = 0;
+	static char fa_name[5];	//facility representa o objeto simulado
+	testsvector *tests;
+
+	if(argc != 2){
+		puts("Uso correto: tempo <num-nodos>");
+		exit(1);
+	}
+
+	N = atoi(argv[1]);
+	smpl(0, "programa tempo");
+	reset();
+	stream(1);
+	nodo = (tnodo*) malloc(sizeof(tnodo)*N);
+	for (i = 0; i < N; i++) {
+	 	memset(fa_name, '\0', 5);
+	 	printf(fa_name, "%d", i);
+	 	nodo[i].id = facility(fa_name, 1);
+
+		//para cada nodo cria e inicializa vetor state com -1(UNKNOWN)
+		nodo[i].state = (int*) malloc (sizeof(int)*N);
+		for (int j = 0; j < N; j++)
+			nodo[i].state[j] = -1;
+	 }
+
+	 print_init();
+	 /*schedule inicial*/
+	 for (i = 0; i < N; i++)
+	 	schedule(test, 30.0, i);
+
+	 //---------------log1 (4 nodos)
+	 schedule(fault, 31.0, 1);
+	 schedule(repair, 61.0, 1);
+	 //---------------fim log1
+	 
+	 //----------------log2 (8 nodos)
+	 // schedule(fault, 31.0, 1);
+	 // schedule(fault, 61.0, 4);
+	 // schedule(fault, 100.0, 6);
+	 // schedule(repair, 151.0, 4);
+	 //----------------fim log2
+
+	 //----------------log3 (4 nodos) - mostrar rodadas 
+	 // schedule(fault, 31.0, 2);
+	 // schedule(fault, 61.0, 1);
+	 // schedule(fault, 91.0, 0);
+	 // schedule(repair, 121.0, 1);
+	 //----------------fim log3
+
+	 //----------------log4 (16 nodos)
+	 // schedule(fault, 31.0, 8);
+	 // schedule(fault, 70.0, 9);
+	 // schedule(fault, 130.0, 11);
+	 // schedule(fault, 225.0, 3);
+	 // schedule(repair, 290.0, 11);
+	 // schedule(fault, 350.0, 2);
+	 //----------------fim log4
+
+	 //---------------log5 (4 nodos) varios repair no mesmo nodo
+	 // schedule(fault, 31.0, 2);
+	 // schedule(repair, 61.0, 2);
+	 // schedule(fault, 121.0, 2);
+	 // schedule(repair, 171.0, 2);
+	 // schedule(fault, 230.0, 2);
+	 // schedule(repair, 181.0, 2);
+	 //---------------fim log5
+	aux = N;
+	 printf("Programa inicializa - todos os nodos estao *sem-falha*\n");
+	 for(s = 0; aux != 1; aux /= 2, s++);//for para calcular o valor de S (log de n)
+	 tests = testes(N, s, nodo); //calcula quais os testes executados
+	 for(i = 0; i < N; i++){//printa os testes executados por cada nodo, apos ser calculado
+		 printf("O nodo %d testa os nodos: ", i);
+		 for(int j = 0; j < tests[i].size; j++)
+			 printf("%d ", tests[i].vector[j]);
+		 printf("\n");
+	 }
+
+	 while(time() < 100.0) {
+	 	cause(&event, &token); //causa o proximo evento
+	 	switch(event) {
+	 		case test:
+	 		if(status(nodo[token].id) != 0){
+				nodofalho++;  //contabiliza nodos FALHOS
+				break; //se o nodo for falho, então quebra
+			}
+			nodosemfalha++;  //contabiliza nodos SEM-FALHA
+
+			//se o state de token for um numero impar, esta desatualizado
+			//esta marcando como falho (impar = falho, par = sem-falha)
+			//acrescenta-se +1, para indicar que esta sem-falha e ficar certo
+			if((nodo[token].state[token] % 2) != 0)
+				nodo[token].state[token]++;
+
+			for(int i = 0; i < tests[token].size; i++){
+				ntestes++;  //contabiliza os testes realizados
+				if(status(nodo[tests[token].vector[i]].id) == 0) {//se o nodo estiver sem-falha
+					//atualiza o valor no state, caso esteja desatualizado
+					if((nodo[token].state[tests[token].vector[i]] % 2) != 0)
+						nodo[token].state[tests[token].vector[i]]++;
+
+					for(int j = 0; j < N; j++){//for para verificar as novidades
+						if(nodo[token].state[j] == -1){
+							//caso seja o inicio do programa, atualiza o state com 0
+							nodo[token].state[j] = 0;
+						}else if(nodo[token].state[j] < nodo[tests[token].vector[i]].state[j]){
+							//caso nao seja o inicio e o valor do state do token seja menor
+							//que o do state de j, entao copia as novidades
+							nodo[token].state[j] = nodo[tests[token].vector[i]].state[j];
+						}
+					}
+				} else if((nodo[token].state[tests[token].vector[i]] % 2) == 0) {
+					//caso o nodo esteja falho e o state esteja desatualizado
+					//ou seja, esta como nao falho, mas na verdade esta falho
+					//entao atualiza o vetor state
+					nodo[token].state[tests[token].vector[i]]++;
+				}
+			}
+
+
+
+// -------------------------------verificacao para numero de rodadas-------------------------------------------------------------
+			if((nodofalho + nodosemfalha == N)){  //so entra se todos foram testados
+				int nodosf, i, end = 1;
+
+				nodosemfalha = 0;
+				for (nodosf = 0; nodosf < N; nodosf++){  //encontra o primeiro nodo SEM-FALHA
+					if (status(nodo[nodosf].id) == 0)
+					break;
+				}
+
+				if (nodosf != N-1){ //verifica se nao eh o ultimo, para evitar seg fault
+					for (i = nodosf + 1; i < N; i++){ //compara o vetor de nodosf com os demais
+						if (status(nodo[i].id) != 0)//se for nodo FALHO apenas passa para o proximo
+						continue;
+
+						for (int j = 0; j < N; j++){  //compara se state dos SEM-FALHA sao iguais
+							if (nodo[nodosf].state[j] != nodo[i].state[j])
+							end = 0;//significa que os vetores estao diferentes
+						}
+					}
+				}
+				nrodadas++;//aumenta o numero de rodadas, independente dos vetores estarem iguais
+				totalrodadas++;//aumenta as rodadas do programa todo
+				if (i == N && end == 1){
+					//todos os vetores SEM-FALHA foram comparados e sao iguais
+					//entao o evento foi diagnosticado, printa a quantidade de rodadas e testes necessarios
+					printf ("O evento precisou de %d rodadas e %d testes para ser diagnosticado\n", nrodadas, ntestes);
+				}
+			}
+// ---------------------------------------fim da verificacao de rodadas-----------------------------------------------------
+
+	 		schedule(test, 30.0, token);
+	 		break;
+
+	 		case fault:
+			print_state(nodo, N);
+			//atualiza os valores para continuar contando
+			nodosemfalha = 0;
+			nrodadas = 0;
+			ntestes = 0;
+
+	 		r = request(nodo[token].id, token, 0);
+	 		if(r != 0) {
+	 			puts("Impossível falhar nodo");
+	 			exit(1);
+	 		}
+	 		printf("EVENTO: O nodo %d falhou no tempo %5.1f\n", token, time());
+
+//-----------------------a cada evento, recalcula o vetor tests----------------------------------
+			free(tests);
+			tests = testes(N, s, nodo); //calcula quais os testes executados
+			for(i = 0; i < N; i++){//printa os testes executados por cada nodo, apos ser calculado
+				printf("O nodo %d testa os nodos: ", i);
+				for(int j = 0; j < tests[i].size; j++)
+					printf("%d ", tests[i].vector[j]);
+				printf("\n");
+			}
+			break;
+
+	 		case repair:
+			print_state(nodo, N);
+			//atualiza os valores para continuar contando
+			nodofalho--; //se recuperou, tem um nodo falho a menos
+			nodosemfalha = 0;
+			nrodadas = 0;
+			ntestes = 0;
+
+	 		release(nodo[token].id, token);
+	 		printf("EVENTO: O nodo %d recuperou no tempo %5.1f\n", token, time());
+
+//-----------------------a cada evento, recalcula o vetor tests----------------------------------
+			free(tests);
+			tests = testes(N, s, nodo); //calcula quais os testes executados
+			for(i = 0; i < N; i++){//printa os testes executados por cada nodo, apos ser calculado
+				printf("O nodo %d testa os nodos: ", i);
+				for(int j = 0; j < tests[i].size; j++)
+					printf("%d ", tests[i].vector[j]);
+				printf("\n");
+			}
+			schedule(test, 30.0, token);
+	 	}
+	}
+
+	print_end(totalrodadas, N);
+
+	return 0;
+}
