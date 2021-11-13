@@ -1,0 +1,37 @@
+---------------------------------------------------------------------
+Sistemas Distribuídos 2021/ERE4: Tarefa Prática 2
+Cada processo correto executa testes até achar outro processo correto
+Autor: Guilherme Eduardo Konopatzki Filho
+Última alteração: 15/11/2021
+Este programa foi executado para N = 6 processos.
+---------------------------------------------------------------------
+O nodo 0 encontrou o nodo 1 SEM-FALHA no tempo  30.0
+O nodo 1 encontrou o nodo 2 SEM-FALHA no tempo  30.0
+O nodo 2 encontrou o nodo 3 SEM-FALHA no tempo  30.0
+O nodo 3 encontrou o nodo 4 SEM-FALHA no tempo  30.0
+O nodo 4 encontrou o nodo 5 SEM-FALHA no tempo  30.0
+O nodo 5 encontrou o nodo 0 SEM-FALHA no tempo  30.0
+O nodo 0 falhou no tempo  31.0
+O nodo 1 falhou no tempo  41.0
+O nodo 2 falhou no tempo  41.0
+O nodo 3 falhou no tempo  51.0
+O nodo 4 encontrou o nodo 5 SEM-FALHA no tempo  60.0
+O nodo 5 encontrou o nodo 0 FALHO no tempo  60.0 e continuou a procurar
+O nodo 5 encontrou o nodo 1 FALHO no tempo  60.0 e continuou a procurar
+O nodo 5 encontrou o nodo 2 FALHO no tempo  60.0 e continuou a procurar
+O nodo 5 encontrou o nodo 3 FALHO no tempo  60.0 e continuou a procurar
+O nodo 5 encontrou o nodo 4 SEM-FALHA no tempo  60.0
+O nodo 4 encontrou o nodo 5 SEM-FALHA no tempo  90.0
+O nodo 5 encontrou o nodo 0 FALHO no tempo  90.0 e continuou a procurar
+O nodo 5 encontrou o nodo 1 FALHO no tempo  90.0 e continuou a procurar
+O nodo 5 encontrou o nodo 2 FALHO no tempo  90.0 e continuou a procurar
+O nodo 5 encontrou o nodo 3 FALHO no tempo  90.0 e continuou a procurar
+O nodo 5 encontrou o nodo 4 SEM-FALHA no tempo  90.0
+O nodo 4 encontrou o nodo 5 SEM-FALHA no tempo 120.0
+O nodo 5 encontrou o nodo 0 FALHO no tempo 120.0 e continuou a procurar
+O nodo 5 encontrou o nodo 1 FALHO no tempo 120.0 e continuou a procurar
+O nodo 5 encontrou o nodo 2 FALHO no tempo 120.0 e continuou a procurar
+O nodo 5 encontrou o nodo 3 FALHO no tempo 120.0 e continuou a procurar
+O nodo 5 encontrou o nodo 4 SEM-FALHA no tempo 120.0
+O nodo 4 encontrou o nodo 5 SEM-FALHA no tempo 150.0
+
