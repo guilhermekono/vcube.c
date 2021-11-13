@@ -1,0 +1,119 @@
+===========================================================
+         Execucao do algoritmo V-Cube
+         Aluno: Guilherme Eduardo Konopatzki Filho
+         Professor: Elias P. Duarte Jr.
+         Disciplina: Sistemas Distribuidos
+         Ultima modificacao: 15/11/2021
+===========================================================
+
+Programa inicializa - todos os nodos estao *sem-falha*
+O nodo 0 testa os nodos: 1 2 4 
+O nodo 1 testa os nodos: 0 3 5 
+O nodo 2 testa os nodos: 0 3 6 
+O nodo 3 testa os nodos: 1 2 7 
+O nodo 4 testa os nodos: 0 5 6 
+O nodo 5 testa os nodos: 1 4 7 
+O nodo 6 testa os nodos: 2 4 7 
+O nodo 7 testa os nodos: 3 5 6 
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  
+-------------------------------------
+>     Nodo 0 |  0  0  0  0  0  0  0  0 
+>     Nodo 1 |  0  0  0  0  0  0  0  0 
+>     Nodo 2 |  0  0  0  0  0  0  0  0 
+>     Nodo 3 |  0  0  0  0  0  0  0  0 
+>     Nodo 4 |  0  0  0  0  0  0  0  0 
+>     Nodo 5 |  0  0  0  0  0  0  0  0 
+>     Nodo 6 |  0  0  0  0  0  0  0  0 
+>     Nodo 7 |  0  0  0  0  0  0  0  0 
+
+EVENTO: O nodo 1 falhou no tempo  31.0
+O nodo 0 testa os nodos: 1 2 3 4 5 
+O nodo 1 testa os nodos: 
+O nodo 2 testa os nodos: 0 3 6 
+O nodo 3 testa os nodos: 1 2 7 
+O nodo 4 testa os nodos: 0 5 6 
+O nodo 5 testa os nodos: 1 4 7 
+O nodo 6 testa os nodos: 2 4 7 
+O nodo 7 testa os nodos: 3 5 6 
+O evento precisou de 1 rodadas e 23 testes para ser diagnosticado
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  
+-------------------------------------
+>     Nodo 0 |  0  1  0  0  0  0  0  0 
+>     Nodo 1 |  0  0  0  0  0  0  0  0 
+>     Nodo 2 |  0  1  0  0  0  0  0  0 
+>     Nodo 3 |  0  1  0  0  0  0  0  0 
+>     Nodo 4 |  0  1  0  0  0  0  0  0 
+>     Nodo 5 |  0  1  0  0  0  0  0  0 
+>     Nodo 6 |  0  1  0  0  0  0  0  0 
+>     Nodo 7 |  0  1  0  0  0  0  0  0 
+
+EVENTO: O nodo 4 falhou no tempo  61.0
+O nodo 0 testa os nodos: 1 2 3 4 5 
+O nodo 1 testa os nodos: 
+O nodo 2 testa os nodos: 0 3 6 
+O nodo 3 testa os nodos: 1 2 7 
+O nodo 4 testa os nodos: 
+O nodo 5 testa os nodos: 0 1 4 6 7 
+O nodo 6 testa os nodos: 2 4 7 
+O nodo 7 testa os nodos: 3 5 6 
+O evento precisou de 1 rodadas e 22 testes para ser diagnosticado
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  
+-------------------------------------
+>     Nodo 0 |  0  1  0  0  1  0  0  0 
+>     Nodo 1 |  0  0  0  0  0  0  0  0 
+>     Nodo 2 |  0  1  0  0  1  0  0  0 
+>     Nodo 3 |  0  1  0  0  1  0  0  0 
+>     Nodo 4 |  0  1  0  0  0  0  0  0 
+>     Nodo 5 |  0  1  0  0  1  0  0  0 
+>     Nodo 6 |  0  1  0  0  1  0  0  0 
+>     Nodo 7 |  0  1  0  0  1  0  0  0 
+
+EVENTO: O nodo 6 falhou no tempo 100.0
+O nodo 0 testa os nodos: 1 2 3 4 5 
+O nodo 1 testa os nodos: 
+O nodo 2 testa os nodos: 0 3 6 
+O nodo 3 testa os nodos: 1 2 7 
+O nodo 4 testa os nodos: 
+O nodo 5 testa os nodos: 0 1 4 6 7 
+O nodo 6 testa os nodos: 
+O nodo 7 testa os nodos: 2 3 4 5 6 
+O evento precisou de 2 rodadas e 42 testes para ser diagnosticado
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  
+-------------------------------------
+>     Nodo 0 |  0  1  0  0  1  0  1  0 
+>     Nodo 1 |  0  0  0  0  0  0  0  0 
+>     Nodo 2 |  0  1  0  0  1  0  1  0 
+>     Nodo 3 |  0  1  0  0  1  0  1  0 
+>     Nodo 4 |  0  1  0  0  0  0  0  0 
+>     Nodo 5 |  0  1  0  0  1  0  1  0 
+>     Nodo 6 |  0  1  0  0  1  0  0  0 
+>     Nodo 7 |  0  1  0  0  1  0  1  0 
+
+EVENTO: O nodo 4 recuperou no tempo 151.0
+O nodo 0 testa os nodos: 1 2 3 4 5 
+O nodo 1 testa os nodos: 
+O nodo 2 testa os nodos: 0 3 6 
+O nodo 3 testa os nodos: 1 2 7 
+O nodo 4 testa os nodos: 0 5 6 
+O nodo 5 testa os nodos: 1 4 7 
+O nodo 6 testa os nodos: 
+O nodo 7 testa os nodos: 2 3 4 5 6 
+O evento precisou de 1 rodadas e 22 testes para ser diagnosticado
+
+Número de rodadas total do programa: 5
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  
+-------------------------------------
+>     Nodo 0 |  0  1  0  0  2  0  1  0 
+>     Nodo 1 |  0  0  0  0  0  0  0  0 
+>     Nodo 2 |  0  1  0  0  2  0  1  0 
+>     Nodo 3 |  0  1  0  0  2  0  1  0 
+>     Nodo 4 |  0  1  0  0  2  0  1  0 
+>     Nodo 5 |  0  1  0  0  2  0  1  0 
+>     Nodo 6 |  0  1  0  0  1  0  0  0 
+>     Nodo 7 |  0  1  0  0  2  0  1  0 
+
