@@ -1,4 +1,4 @@
-//Tarefa 2: Cada processo correto executa testes até achar outro processo correto
+//Tarefa 3: Cada processo mantém localmente o vetor State[N].
 //Aluno: Guilherme Eduardo Konopatzki Filho
 //Disciplina: Sistemas distribuídos
 //Professor: Elias Duarte
