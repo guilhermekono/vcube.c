@@ -1,0 +1,98 @@
+===========================================================
+         Execucao do algoritmo V-Cube
+         Aluno: Guilherme Eduardo Konopatzki Filho
+         Professor: Elias P. Duarte Jr.
+         Disciplina: Sistemas Distribuidos
+         Ultima modificacao: 15/11/2021
+===========================================================
+
+Programa inicializa - todos os nodos estao *sem-falha*
+O nodo 0 testa os nodos: 1 2 
+O nodo 1 testa os nodos: 0 3 
+O nodo 2 testa os nodos: 0 3 
+O nodo 3 testa os nodos: 1 2 
+
+Vetor STATE(i): 0  1  2  3  
+-------------------------------------
+>     Nodo 0 |  0  0  0  0 
+>     Nodo 1 |  0  0  0  0 
+>     Nodo 2 |  0  0  0  0 
+>     Nodo 3 |  0  0  0  0 
+
+EVENTO: O nodo 2 falhou no tempo  31.0
+O nodo 0 testa os nodos: 1 2 
+O nodo 1 testa os nodos: 0 3 
+O nodo 2 testa os nodos: 
+O nodo 3 testa os nodos: 0 1 2 
+O evento precisou de 1 rodadas e 7 testes para ser diagnosticado
+
+Vetor STATE(i): 0  1  2  3  
+-------------------------------------
+>     Nodo 0 |  0  0  1  0 
+>     Nodo 1 |  0  0  1  0 
+>     Nodo 2 |  0  0  0  0 
+>     Nodo 3 |  0  0  1  0 
+
+EVENTO: O nodo 2 recuperou no tempo  61.0
+O nodo 0 testa os nodos: 1 2 
+O nodo 1 testa os nodos: 0 3 
+O nodo 2 testa os nodos: 0 3 
+O nodo 3 testa os nodos: 1 2 
+O evento precisou de 1 rodadas e 8 testes para ser diagnosticado
+
+Vetor STATE(i): 0  1  2  3  
+-------------------------------------
+>     Nodo 0 |  0  0  2  0 
+>     Nodo 1 |  0  0  2  0 
+>     Nodo 2 |  0  0  2  0 
+>     Nodo 3 |  0  0  2  0 
+
+EVENTO: O nodo 2 falhou no tempo 121.0
+O nodo 0 testa os nodos: 1 2 
+O nodo 1 testa os nodos: 0 3 
+O nodo 2 testa os nodos: 
+O nodo 3 testa os nodos: 0 1 2 
+O evento precisou de 1 rodadas e 7 testes para ser diagnosticado
+
+Vetor STATE(i): 0  1  2  3  
+-------------------------------------
+>     Nodo 0 |  0  0  3  0 
+>     Nodo 1 |  0  0  3  0 
+>     Nodo 2 |  0  0  2  0 
+>     Nodo 3 |  0  0  3  0 
+
+EVENTO: O nodo 2 recuperou no tempo 171.0
+O nodo 0 testa os nodos: 1 2 
+O nodo 1 testa os nodos: 0 3 
+O nodo 2 testa os nodos: 0 3 
+O nodo 3 testa os nodos: 1 2 
+O evento precisou de 1 rodadas e 8 testes para ser diagnosticado
+
+Vetor STATE(i): 0  1  2  3  
+-------------------------------------
+>     Nodo 0 |  0  0  4  0 
+>     Nodo 1 |  0  0  4  0 
+>     Nodo 2 |  0  0  4  0 
+>     Nodo 3 |  0  0  4  0 
+
+EVENTO: O nodo 2 falhou no tempo 230.0
+O nodo 0 testa os nodos: 1 2 
+O nodo 1 testa os nodos: 0 3 
+O nodo 2 testa os nodos: 
+O nodo 3 testa os nodos: 0 1 2 
+O evento precisou de 1 rodadas e 7 testes para ser diagnosticado
+
+--------------------------------------------------------------
+                       RESULTADOS
+
+Número de rodadas total do programa: 5
+
+Vetor STATE ao final do diagnostico:
+
+Vetor STATE(i): 0  1  2  3  
+-------------------------------------
+>     Nodo 0 |  0  0  5  0 
+>     Nodo 1 |  0  0  5  0 
+>     Nodo 2 |  0  0  4  0 
+>     Nodo 3 |  0  0  5  0 
+
