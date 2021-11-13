@@ -1,0 +1,133 @@
+----------------------------------------------------
+Sistemas Distribuídos 2021/ERE4: Tarefa Prática 4
+Quando um processo correto testa outro processo correto obtém as informações de diagnóstico do processo testado sobre todos os processos do sistema exceto aqueles que testou nesta rodada, além do próprio testador
+Autor: Guilherme Eduardo Konopatzki Filho
+Última alteração: 15/11/2021
+Este programa foi executado para N = 6 processos.
+----------------------------------------------------
+Vetor STATE do nodo 0
+>> -1 -1 -1 -1 -1 -1 
+O valor de STATE do nodo 1 foi atualizado para 0
+O nodo 0 encontrou o nodo 1 SEM-FALHA no tempo  30.0
+------
+Vetor STATE do nodo 1
+>> -1 -1 -1 -1 -1 -1 
+O valor de STATE do nodo 2 foi atualizado para 0
+O nodo 1 encontrou o nodo 2 SEM-FALHA no tempo  30.0
+------
+Vetor STATE do nodo 2
+>> -1 -1 -1 -1 -1 -1 
+O valor de STATE do nodo 3 foi atualizado para 0
+O nodo 2 encontrou o nodo 3 SEM-FALHA no tempo  30.0
+------
+Vetor STATE do nodo 3
+>> -1 -1 -1 -1 -1 -1 
+O valor de STATE do nodo 4 foi atualizado para 0
+O nodo 3 encontrou o nodo 4 SEM-FALHA no tempo  30.0
+------
+Vetor STATE do nodo 4
+>> -1 -1 -1 -1 -1 -1 
+O valor de STATE do nodo 5 foi atualizado para 0
+O nodo 4 encontrou o nodo 5 SEM-FALHA no tempo  30.0
+------
+Vetor STATE do nodo 5
+>> -1 -1 -1 -1 -1 -1 
+O valor de STATE do nodo 0 foi atualizado para 0
+O nodo 5 encontrou o nodo 0 SEM-FALHA no tempo  30.0
+------
+O nodo 1 falhou no tempo  31.0
+Vetor STATE do nodo 0
+>> -1 0 -1 -1 -1 -1 
+O valor de STATE do nodo 1 foi atualizado para 1
+O nodo 0 encontrou o nodo 1 FALHO no tempo  60.0 e continuou a procurar
+------
+O valor de STATE do nodo 2 foi atualizado para 0
+O nodo 0 encontrou o nodo 2 SEM-FALHA no tempo  60.0
+------
+Vetor STATE do nodo 2
+>> -1 -1 -1 0 -1 -1 
+O valor de STATE do nodo 3 foi atualizado para 0
+O nodo 2 encontrou o nodo 3 SEM-FALHA no tempo  60.0
+------
+Vetor STATE do nodo 3
+>> -1 -1 -1 -1 0 -1 
+O valor de STATE do nodo 4 foi atualizado para 0
+O nodo 3 encontrou o nodo 4 SEM-FALHA no tempo  60.0
+------
+Vetor STATE do nodo 4
+>> -1 -1 -1 -1 -1 0 
+O valor de STATE do nodo 5 foi atualizado para 0
+O nodo 4 encontrou o nodo 5 SEM-FALHA no tempo  60.0
+------
+Vetor STATE do nodo 5
+>> 0 0 -1 -1 -1 -1 
+O valor de STATE do nodo 0 foi atualizado para 0
+O nodo 5 encontrou o nodo 0 SEM-FALHA no tempo  60.0
+------
+O nodo 1 recuperou no tempo  69.0
+Vetor STATE do nodo 0
+>> -1 1 0 0 -1 -1 
+O valor de STATE do nodo 1 foi atualizado para 0
+O nodo 0 encontrou o nodo 1 SEM-FALHA no tempo  90.0
+------
+Vetor STATE do nodo 2
+>> -1 -1 -1 0 0 -1 
+O valor de STATE do nodo 3 foi atualizado para 0
+O nodo 2 encontrou o nodo 3 SEM-FALHA no tempo  90.0
+------
+Vetor STATE do nodo 3
+>> -1 -1 -1 -1 0 0 
+O valor de STATE do nodo 4 foi atualizado para 0
+O nodo 3 encontrou o nodo 4 SEM-FALHA no tempo  90.0
+------
+Vetor STATE do nodo 4
+>> 0 0 -1 -1 -1 0 
+O valor de STATE do nodo 5 foi atualizado para 0
+O nodo 4 encontrou o nodo 5 SEM-FALHA no tempo  90.0
+------
+Vetor STATE do nodo 5
+>> 0 0 0 0 -1 -1 
+O valor de STATE do nodo 0 foi atualizado para 0
+O nodo 5 encontrou o nodo 0 SEM-FALHA no tempo  90.0
+------
+Vetor STATE do nodo 1
+>> -1 -1 0 -1 -1 -1 
+O valor de STATE do nodo 2 foi atualizado para 0
+O nodo 1 encontrou o nodo 2 SEM-FALHA no tempo  99.0
+------
+Vetor STATE do nodo 0
+>> -1 0 0 0 -1 -1 
+O valor de STATE do nodo 1 foi atualizado para 0
+O nodo 0 encontrou o nodo 1 SEM-FALHA no tempo 120.0
+------
+Vetor STATE do nodo 2
+>> -1 -1 -1 0 0 0 
+O valor de STATE do nodo 3 foi atualizado para 0
+O nodo 2 encontrou o nodo 3 SEM-FALHA no tempo 120.0
+------
+Vetor STATE do nodo 3
+>> 0 0 -1 -1 0 0 
+O valor de STATE do nodo 4 foi atualizado para 0
+O nodo 3 encontrou o nodo 4 SEM-FALHA no tempo 120.0
+------
+Vetor STATE do nodo 4
+>> 0 0 0 0 -1 0 
+O valor de STATE do nodo 5 foi atualizado para 0
+O nodo 4 encontrou o nodo 5 SEM-FALHA no tempo 120.0
+------
+Vetor STATE do nodo 5
+>> 0 0 0 0 -1 -1 
+O valor de STATE do nodo 0 foi atualizado para 0
+O nodo 5 encontrou o nodo 0 SEM-FALHA no tempo 120.0
+------
+Vetor STATE do nodo 1
+>> -1 -1 0 0 0 0 
+O valor de STATE do nodo 2 foi atualizado para 0
+O nodo 1 encontrou o nodo 2 SEM-FALHA no tempo 129.0
+------
+Vetor STATE do nodo 0
+>> -1 0 0 0 0 0 
+O valor de STATE do nodo 1 foi atualizado para 0
+O nodo 0 encontrou o nodo 1 SEM-FALHA no tempo 150.0
+------
+
