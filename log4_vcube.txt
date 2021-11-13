@@ -1,0 +1,279 @@
+===========================================================
+         Execucao do algoritmo V-Cube
+         Aluno: Guilherme Eduardo Konopatzki Filho
+         Professor: Elias P. Duarte Jr.
+         Disciplina: Sistemas Distribuidos
+         Ultima modificacao: 15/11/2021
+===========================================================
+
+Programa inicializa - todos os nodos estao *sem-falha*
+O nodo 0 testa os nodos: 1 2 4 8 
+O nodo 1 testa os nodos: 0 3 5 9 
+O nodo 2 testa os nodos: 0 3 6 10 
+O nodo 3 testa os nodos: 1 2 7 11 
+O nodo 4 testa os nodos: 0 5 6 12 
+O nodo 5 testa os nodos: 1 4 7 13 
+O nodo 6 testa os nodos: 2 4 7 14 
+O nodo 7 testa os nodos: 3 5 6 15 
+O nodo 8 testa os nodos: 0 9 10 12 
+O nodo 9 testa os nodos: 1 8 11 13 
+O nodo 10 testa os nodos: 2 8 11 14 
+O nodo 11 testa os nodos: 3 9 10 15 
+O nodo 12 testa os nodos: 4 8 13 14 
+O nodo 13 testa os nodos: 5 9 12 15 
+O nodo 14 testa os nodos: 6 10 12 15 
+O nodo 15 testa os nodos: 7 11 13 14 
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  
+-------------------------------------
+>     Nodo 0 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 1 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 2 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 3 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 4 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 5 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 6 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 7 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 8 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 9 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 10 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 11 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 12 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 13 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 14 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 15 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+
+EVENTO: O nodo 8 falhou no tempo  31.0
+O nodo 0 testa os nodos: 1 2 4 8 
+O nodo 1 testa os nodos: 0 3 5 9 
+O nodo 2 testa os nodos: 0 3 6 10 
+O nodo 3 testa os nodos: 1 2 7 11 
+O nodo 4 testa os nodos: 0 5 6 12 
+O nodo 5 testa os nodos: 1 4 7 13 
+O nodo 6 testa os nodos: 2 4 7 14 
+O nodo 7 testa os nodos: 3 5 6 15 
+O nodo 8 testa os nodos: 
+O nodo 9 testa os nodos: 0 1 8 10 11 12 13 
+O nodo 10 testa os nodos: 2 8 11 14 
+O nodo 11 testa os nodos: 3 9 10 15 
+O nodo 12 testa os nodos: 4 8 13 14 
+O nodo 13 testa os nodos: 5 9 12 15 
+O nodo 14 testa os nodos: 6 10 12 15 
+O nodo 15 testa os nodos: 7 11 13 14 
+O evento precisou de 1 rodadas e 63 testes para ser diagnosticado
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  
+-------------------------------------
+>     Nodo 0 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 1 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 2 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 3 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 4 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 5 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 6 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 7 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 8 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 9 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 10 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 11 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 12 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 13 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 14 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 15 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+
+EVENTO: O nodo 9 falhou no tempo  70.0
+O nodo 0 testa os nodos: 1 2 4 8 
+O nodo 1 testa os nodos: 0 3 5 9 
+O nodo 2 testa os nodos: 0 3 6 10 
+O nodo 3 testa os nodos: 1 2 7 11 
+O nodo 4 testa os nodos: 0 5 6 12 
+O nodo 5 testa os nodos: 1 4 7 13 
+O nodo 6 testa os nodos: 2 4 7 14 
+O nodo 7 testa os nodos: 3 5 6 15 
+O nodo 8 testa os nodos: 
+O nodo 9 testa os nodos: 
+O nodo 10 testa os nodos: 0 2 8 11 12 14 
+O nodo 11 testa os nodos: 1 3 9 10 13 15 
+O nodo 12 testa os nodos: 4 8 13 14 
+O nodo 13 testa os nodos: 5 9 12 15 
+O nodo 14 testa os nodos: 6 10 12 15 
+O nodo 15 testa os nodos: 7 11 13 14 
+O evento precisou de 2 rodadas e 120 testes para ser diagnosticado
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  
+-------------------------------------
+>     Nodo 0 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 1 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 2 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 3 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 4 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 5 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 6 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 7 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 8 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 9 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 10 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 11 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 12 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 13 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 14 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 15 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+
+EVENTO: O nodo 11 falhou no tempo 130.0
+O nodo 0 testa os nodos: 1 2 4 8 
+O nodo 1 testa os nodos: 0 3 5 9 
+O nodo 2 testa os nodos: 0 3 6 10 
+O nodo 3 testa os nodos: 1 2 7 11 
+O nodo 4 testa os nodos: 0 5 6 12 
+O nodo 5 testa os nodos: 1 4 7 13 
+O nodo 6 testa os nodos: 2 4 7 14 
+O nodo 7 testa os nodos: 3 5 6 15 
+O nodo 8 testa os nodos: 
+O nodo 9 testa os nodos: 
+O nodo 10 testa os nodos: 0 1 2 3 8 9 11 12 13 14 15 
+O nodo 11 testa os nodos: 
+O nodo 12 testa os nodos: 4 8 13 14 
+O nodo 13 testa os nodos: 5 9 12 15 
+O nodo 14 testa os nodos: 6 10 12 15 
+O nodo 15 testa os nodos: 7 11 13 14 
+O evento precisou de 3 rodadas e 177 testes para ser diagnosticado
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  
+-------------------------------------
+>     Nodo 0 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 1 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 2 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 3 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 4 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 5 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 6 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 7 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 8 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 9 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 10 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 11 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 12 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 13 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 14 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 15 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+
+EVENTO: O nodo 3 falhou no tempo 225.0
+O nodo 0 testa os nodos: 1 2 4 8 
+O nodo 1 testa os nodos: 0 3 5 9 
+O nodo 2 testa os nodos: 0 1 3 6 7 10 11 
+O nodo 3 testa os nodos: 
+O nodo 4 testa os nodos: 0 5 6 12 
+O nodo 5 testa os nodos: 1 4 7 13 
+O nodo 6 testa os nodos: 2 4 7 14 
+O nodo 7 testa os nodos: 3 5 6 15 
+O nodo 8 testa os nodos: 
+O nodo 9 testa os nodos: 
+O nodo 10 testa os nodos: 0 1 2 3 8 9 11 12 13 14 15 
+O nodo 11 testa os nodos: 
+O nodo 12 testa os nodos: 4 8 13 14 
+O nodo 13 testa os nodos: 5 9 12 15 
+O nodo 14 testa os nodos: 6 10 12 15 
+O nodo 15 testa os nodos: 7 11 13 14 
+O evento precisou de 2 rodadas e 116 testes para ser diagnosticado
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  
+-------------------------------------
+>     Nodo 0 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 1 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 2 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 3 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 4 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 5 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 6 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 7 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 8 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 9 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 10 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 11 |  0  0  0  0  0  0  0  0  1   1   0   0   0   0   0   0 
+>     Nodo 12 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 13 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 14 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 15 |  0  0  0  1  0  0  0  0  1   1   0   1   0   0   0   0 
+
+EVENTO: O nodo 11 recuperou no tempo 290.0
+O nodo 0 testa os nodos: 1 2 4 8 
+O nodo 1 testa os nodos: 0 3 5 9 
+O nodo 2 testa os nodos: 0 1 3 6 7 10 11 
+O nodo 3 testa os nodos: 
+O nodo 4 testa os nodos: 0 5 6 12 
+O nodo 5 testa os nodos: 1 4 7 13 
+O nodo 6 testa os nodos: 2 4 7 14 
+O nodo 7 testa os nodos: 3 5 6 15 
+O nodo 8 testa os nodos: 
+O nodo 9 testa os nodos: 
+O nodo 10 testa os nodos: 0 2 8 11 12 14 
+O nodo 11 testa os nodos: 1 3 9 10 13 15 
+O nodo 12 testa os nodos: 4 8 13 14 
+O nodo 13 testa os nodos: 5 9 12 15 
+O nodo 14 testa os nodos: 6 10 12 15 
+O nodo 15 testa os nodos: 7 11 13 14 
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  
+-------------------------------------
+>     Nodo 0 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 1 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 2 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 3 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 4 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 5 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 6 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 7 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 8 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 9 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 10 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 11 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 12 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 13 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 14 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 15 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+
+EVENTO: O nodo 2 falhou no tempo 350.0
+O nodo 0 testa os nodos: 1 2 4 6 8 10 
+O nodo 1 testa os nodos: 0 3 5 7 9 11 
+O nodo 2 testa os nodos: 
+O nodo 3 testa os nodos: 
+O nodo 4 testa os nodos: 0 5 6 12 
+O nodo 5 testa os nodos: 1 4 7 13 
+O nodo 6 testa os nodos: 2 4 7 14 
+O nodo 7 testa os nodos: 3 5 6 15 
+O nodo 8 testa os nodos: 
+O nodo 9 testa os nodos: 
+O nodo 10 testa os nodos: 0 2 8 11 12 14 
+O nodo 11 testa os nodos: 1 3 9 10 13 15 
+O nodo 12 testa os nodos: 4 8 13 14 
+O nodo 13 testa os nodos: 5 9 12 15 
+O nodo 14 testa os nodos: 6 10 12 15 
+O nodo 15 testa os nodos: 7 11 13 14 
+O evento precisou de 2 rodadas e 112 testes para ser diagnosticado
+
+--------------------------------------------------------------
+                       RESULTADOS
+
+Número de rodadas total do programa: 11
+
+Vetor STATE ao final do diagnostico:
+
+Vetor STATE(i): 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  
+-------------------------------------
+>     Nodo 0 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 1 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 2 |  0  0  0  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 3 |  0  0  0  0  0  0  0  0  1   1   0   1   0   0   0   0 
+>     Nodo 4 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 5 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 6 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 7 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 8 |  0  0  0  0  0  0  0  0  0   0   0   0   0   0   0   0 
+>     Nodo 9 |  0  0  0  0  0  0  0  0  1   0   0   0   0   0   0   0 
+>     Nodo 10 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 11 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 12 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 13 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 14 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+>     Nodo 15 |  0  0  1  1  0  0  0  0  1   1   0   2   0   0   0   0 
+
