@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+<title>Sistemas Distribuídos - VCube</title>
+</head>
+<body>
+    <header>
+    <center><h2><a href="index.html">Trabalho Prático - VCube</a></h2></center>
+    <!-- <p><b>Nome:</b> Guilherme Eduardo Konopatzki Filho</p>
+    <p><b>Professor:</b> Elias Procópio Duarte Jr.</p>
+    <p>Data da última modificação: 15/11/2021</p> -->
+  </header>
+
+<p>Resumo das mini tarefas: um nodo sem-falha executa testes em sequência, até que encontre um outro
+    nodo sem-falha, para então obter as informações de diagnóstico sobre os outros nodos presentes
+     no sistema (exceto os nodos que já testou anteriormente).</p>
+
+<p>Os nodos presentes no sistema podem ser representados por um grafo completo e os nodos sem-falhas
+foram um anel no grafo.
+
+Nesta implementação, cada nodo contém um vetor STATE, responsável por armazenar as informações de diagnóstico
+dos demais nodos, sendo que o vetor pode ter três valores possíveis:</p>
+
+<ul>
+  <li>-1 significa que estado do nodo é desconhecido (UNKNOWN)</li>
+  <li>0 - significa que o nodo está sem-falha</li>
+  <li>1 - significa que o nodo está falho</li>
+</ul>
+
+<p>A seguir há a explicação de 4 pequenas tarefas, implementadas a partir do código base passado
+    pelo professor em sala de aula.</p>
+<p>A <i>tarefa 1</i> consistia em fazer com que cada nodo testasse o próximo no anel. Esta funcionalidade foi implementada com o acréscimo de uma estrutura
+    condicional (IF/ELSE) quando a simulação faz um teste em um nodo. O próximo nodo é definido como:</p>
+    <p align=center>(<i>token</i>+1)%N</p>
+    <p>Onde <i>token</i> indica qual nodo está sendo executado pelo sistema no momento,
+    e N representa o número de nodos do sistema.</p>
+    <p>O teste é feito através da função do smpl <i>status</i>.</p><br>
+
+<p>A <i>tarefa 2</i> consistia em fazer com que cada nodo sem-falha executasse testes sequencialmente, até que fosse
+    encontrado um outro nodo sem-falha. Isto foi implementado com a ajuda de uma estrutura de repetição (FOR),
+    sendo que toda vez que o nodo atual (<i>token</i>) encontrar um outro nodo falho, continua a andar no grafo
+    procurando um nodo sem-falha. Quando este é encontrado, o FOR é rompido.</p>
+
+<p>Na <i>tarefa 3</i> foi criado um vetor chamado STATE dentro da estrutura do nodo, de forma
+que cada nodo tenha um vetor STATE para armazenar a informação do nodo testado (0 - <i>fault-free</i> e 1 - <i>faulty</i>).</p>
+<p>Estas informações são salvas dentro do IF já existente no código, onde é feito o teste
+    através da função <i>status</i> e então o retorno é utilizado como informação para
+    atualizar o vetor STATE do nodo.</p>
+
+<p> A <i>tarefa 4</i> permite que um nodo sem-falha, ao encontrar outro nodo sem-falha,
+    obtenha as informações de diagnóstico daquele nodo, sabendo assim os estados de
+    nodos que não foram testados por ele. Para cumprir esta tarefa foi criado um
+    FOR para efetuar a cópia do vetor STATE, dentro da condição do IF de quando o nodo encontra
+    um outro nodo sem-falha.</p>
+
+<p>Com isso, as 4 mini tarefas estão implementadas.</p>
+
+<h2>VCube</h2>
+
+<p>Neste algoritmo, a cada evento (<i>fault/repair</i>), os nodos sem-falha fazem uso
+    da função <i>Ci,s</i> para recalcular quais os testes que devem ser executados.
+    Ao testar um outro nodo sem-falha, o nodo testador verifica se há 'novidades' no vetor <i>state</i>.</p>
+
+    <p>Nesta implementação, cada nodo contém um vetor STATE, responsável por armazenar as informações de diagnóstico
+        dos demais nodos. Neste algoritmo, o vetor STATE armazena de forma um pouco diferente,
+        a cada evento do nodo, o vetor STATE é incrementado. O vetor STATE de todos os nodos começa em -1 (UNKNOWN),
+        mas assumimos que os nodos são inicializados sem-falha, então o valor passará a ser 0.
+        Assim que ocorrer um evento no nodo, que só poderá ser uma falha, o vetor para aquele nodo irá incrementar para 1,
+        quando recuperar passará a ser 2, e assim sucessivamente. Dessa forma, quando o valor do vetor para aquele nodo
+        tiver um número ímpar, saberemos que o nodo está falho, e quando o número for par, o nodo está sem-falha
+        (falhou mas recuperou, ou nunca falhou).</p>
+
+        <p>
+            Para a implementação, o código-base utilizado foi o 'tarefa0', passado em sala de aula.</p>
+            <p>
+            O primeiro passo para a elaboração deste trabalho foi estudar as funções no arquivo <i>cisj.c</i> disponibilizado pelo professor.
+            O código deste arquivo contém funções importantes, que fazem o cálculo dos <i>clusters</i> de testes realizados, fundamental para
+            o algoritmo do V-Cube.
+            </p>
+            
+            <p>
+            A partir do número de nodos <b>N</b> informado pelo usuário, é feito o cálculo para obter o valor de <b>s</b> (log de N).
+            No código, este cálculo é feito da seguinte forma:<br><br>
+            <left>aux = N;<br>
+            for(s = 0; aux != 1; aux /= 2, s++);<br>
+            </left>
+            </p>
+            <p>
+            Desta forma, ao final do for, a variável <b>s</b> conterá o log de N, que é o número de rodadas.
+            Na tabela 1, <b>s</b> corresponde à cada linha da tabela. Cada coluna representa um nodo.
+            Os testes executados para cada nodo serão: o primeiro nodo sem-falha de cada linha.
+            </p>
+            
+            <table border=1 cellspacing=0 cellpadding=2 bordercolor="666633" align=left>
+                <CAPTION ALIGN="bottom">
+                    Tabela 1: testes V-Cube
+                </CAPTION>
+                <tr align = center>
+                    <th>S/i</th>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                </tr>
+                <tr align = center>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>7</td>
+                    <td>6</td>
+                </tr>
+                <tr align = center>
+                    <td>2</td>
+                    <td>2, 3</td>
+                    <td>3, 2</td>
+                    <td>0, 1</td>
+                    <td>1, 0</td>
+                    <td>6, 7</td>
+                    <td>7, 6</td>
+                    <td>4, 5</td>
+                    <td>5, 4</td>
+                </tr>
+                <tr align = center>
+                    <td>3</td>
+                    <td>4, 5, 6, 7</td>
+                    <td>5, 6, 7, 4</td>
+                    <td>6, 7, 4, 5</td>
+                    <td>7, 4, 5, 6</td>
+                    <td>0, 1, 2, 3</td>
+                    <td>1, 2, 3, 0</td>
+                    <td>2, 3, 0, 1</td>
+                    <td>3, 0, 1, 2</td>
+                </tr>
+            </table>
+            <br><br><br><br><br><br><br>
+            <p>
+            Então, conforme visto, o número de colunas da tabela é informado pelo usuário (<b>N</b>) e o número de linhas é calculado
+            a partir de N (<b>s</b>). O conteúdo da tabela é calculado pelas funções presentes em cisj.c.
+            </p>
+            <p>
+            Esta tabela pode ser convertida em uma lista com os testadores de cada nodo. Os testadores serão sempre o primeiro nodo
+            sem-falha de cada linha da tabela. No código, a função que encontra os testadores é chamada de <i>findtester</i>. Essa função
+            consiste em calcular o cluster através da função <i>cis</i>, percorrer o cluster até encontrar o primeiro nodo sem-falha
+            e retornar este nodo. Este cálculo será feito log N vezes, ou visualmente na tabela, o número de linhas.
+            </p>
+            <p>
+                Sempre que ocorrer um evento, é preciso recalcular os testes executados pelos nodos,
+                para isso no código é chamada a função <b>testes</b>, a
+                qual irá retornar uma variável do tipo <i>testsvector</i>, uma estrutura criada para armazenar os vetores de testes dos nodos.
+                A estrutura é composta por um vetor <i>vector</i> e um tamanho <i>size</i>. O retorno da função é então uma matriz
+                contendo <b>N</b> vetores de testes.
+            </p>
+            <p> A função <i>testes</i> por sua vez consiste em três 'fors' alinhados, para percorrer (e alocar) o vetor de testes de
+                <i>n</i> posições e também percorrer as linhas e as colunas da tabela. Dentro do 'for' mais interno é chamada a função
+                <i>findtester</i> e adiciona-se o testador encontrado ao vetor de testes.
+            <p>
+            Para a execução deste trabalho foi necessário acrescentar o vetor STATE à estrutura dos nodos.
+            Este vetor é responsável por armazenar as informações de diagnóstico, porém ao invés de utilizar os valores 0 e 1 para
+            indicar se um nodo é falho ou sem-falha como feito nas mini tarefas, neste trabalho o vetor é apenas incrementado, como já explicado no início do relatório.
+            Assim, quando o valor presente no vetor for ímpar, quer dizer que o nodo é falho, se for par é sem-falha.
+            </p>
+            
+            <p>
+            Dentro do programa principal há um for que percorre o vetor <b>tests[token].size</b>, é neste local que serão pegas as novidades.
+            Também é neste laço que é feita a contagem de testes realizados para diagnosticar um evento durante a rodada.
+            </p>
+            
+            <p>
+            A contagem da rodada de testes é feita através de uma verificação, checando se o número de nodos falhos no sistema somado ao número de nodos sem-falha é igual à N (número de nodos). Com esta contagem, a variável <i>nrodadas</i> será incrementada apenas após todos os nodos efetuarem seus testes. Para saber quantas rodadas foram necessárias para efetuar o diagnóstico de um evento (fault ou repair), é feita mais uma verificação que checa se os vetores states dos nodos sem-falha estão iguais. Caso estejam diferentes, inicia-se uma nova rodada de testes, mas ainda não foi finalizado o diagnóstico do evento. Quando os vetores estão iguais, o programa printa na tela  a quantidade de rodadas e de testes que foram necessárias para realizar o diagnóstico do evento. A cada evento, os contadores de rodadas, de testes e de nodos sem falha são atualizados com 0, para poder iniciar novamente a contagem.
+            </p>
+            <p>
+            Além da contagem de rodadas para disgnosticar um evento, o programa mostra, ao final, a contagem de rodadas total da simulação, para todos os eventos.
+            </p>
+            
+
+
+</ol>
+</p>
+</body>
+</html>
